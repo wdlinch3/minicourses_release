@@ -1,0 +1,15 @@
+\contentsline {section}{\numberline {1}Intro}{2}{section.1}%
+\contentsline {paragraph}{Length}{2}{section*.2}%
+\contentsline {paragraph}{Vectors}{2}{section*.3}%
+\contentsline {paragraph}{Angle}{2}{section*.4}%
+\contentsline {paragraph}{Inner product}{3}{section*.5}%
+\contentsline {subsection}{\numberline {1.1}Metric}{4}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}Curved space}{4}{subsubsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.2}Dynamical gravitational field}{5}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Maxwell's field equations: Part I}{6}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Energy, momentum, and mass}{11}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Maxwell's field equations: Part II}{12}{subsection.1.5}%
+\contentsline {paragraph}{Einstein summation convention}{13}{section*.6}%
+\contentsline {section}{\numberline {2}Gravitation as a field theory}{14}{section.2}%
+\contentsline {subsection}{\numberline {2.1}The covariant derivative}{15}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}The Riemann curvature tensor}{17}{subsection.2.2}%
