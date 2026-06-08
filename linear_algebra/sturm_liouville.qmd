@@ -1,0 +1,251 @@
+---
+title: "Sturm-Liouville and Orthogonal Functions"
+render_with_liquid: false
+format:
+  html:
+    theme: darkly
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    page-layout: article
+    html-math-method: mathjax
+  pdf:
+    pdf-engine: lualatex
+---
+
+These are notes for a discussion about linear algebra and analysis for
+the students of the Research Club.
+
+# Linear algebra
+
+Let $V$ be an $𝐑$-vector space, and recall that a linear operator $L$ on
+$V$ is a linear map $$L:V ⟶ V$$ An eigenvector of $L$ is a vector
+$v_λ ∈ V$ such that $$L v_λ = λ v_λ$$ The number $λ ∈ V$ is called the
+eigenvalue of $L$ associated to the eigenvector $v_λ$.
+
+Suppose $V$ is equipped with an inner product
+$$\left< ⋅ ,  ⋅ \right> : V×V ⟶  𝐑$$ The adjoint $L^\dagger$ of $L$ with
+respect to the inner product is a linear map $$L^\dagger :V  ⟶  V$$
+defined by the formula
+$$\left<   v , L^\dagger u \right> = \left<  L v , u \right>  
+\quad \forall \quad 
+u,v ∈ V$$
+
+::: exercise
+**Exercise 1**. *Let $V = 𝐑^n$ and take the inner product to be the
+Euclidean one. Let $L$ be a matrix and find the entries of $L^\dagger$
+in terms of those of $L$.*
+:::
+
+Since $L^\dagger$ and $L$ are both operators on $V$, we can compare
+then. An operator is called self-adjoint if $L^\dagger = L$.
+
+::: exercise
+**Exercise 2**. *Let $v_λ$ and $v_μ$ be eigenvectors of $L$ and suppose
+$L$ is self-adjoint. Compare the "matrix elements"
+$\left< v_μ, L  v_λ\right>$ and $\left< v_μ, L^\dagger v_λ\right>$ to
+conclude that $v_λ$ is orthogonal to $v_μ$ (with respect to the inner
+product) if $μ ≠ λ$.*
+:::
+
+Consider the special case in which $\mathrm dim\ V = 2$ with the
+Euclidean inner product, and let $v₁ , v₂ ∈ V$ be linearly-independent
+vectors. Compute the Euclidean length $|v₁|$, and define the unit vector
+$$e₁ = { v₁ \over |v₁| }$$ We will now make a new vector $ṽ₂$ defined by
+$$ṽ₂ := v₂ - \left< v₂ , e₁ \right>  e₁$$ It is orthogonal to $e₁$ since
+$e₁$ is a unit vector. Compute the length $|ṽ₂|$ and define the unit
+vector $$e₂ = { ṽ₂ \over |ṽ₂| }$$ By construction
+$$\left< e_i , e_j \right> = δ_{ij}$$ so
+$V=\mathrm{Span}\{ e_i\}_{i=1}²$ is spanned by these
+"ortho(gonal)-normal(ized)" vectors.
+
+::: exercise
+**Exercise 3**
+([Gram-Schmidt](https://en.wikipedia.org/wiki/Gram–Schmidt_process)).
+*Use mathematical induction to extend this result to a procedure
+applicable to any finite-dimensional inner-product space. This algorithm
+is called the Gram-Schmidt orthonormalization process.*
+:::
+
+Together with the result on orthogonal eigenvectors for self-adjoint
+operators, we conclude that if we have a vector space equipped with such
+an operator, we can construct an orthonormal basis of eigenvectors for
+the vector space.
+
+# Function Spaces
+
+## Orthogonal Polynomials
+
+Let $S⊂ 𝐑$ be a subset of the real line and define the space $L²(S)$ of
+square-integrable functions on $S$: $$L²(S) = \left\{ 
+        \ f : S ⟶ 𝐑 \ \Bigg| \int_S  |f(x)|² dx < ∞ 
+    \right\}$$ Note that $L²(S)$ is an inner-product space over $𝐑$ with
+
+Consider $S=[-1,1]$. Note that any continuous function defined on such a
+set is automatically (square) integrable.
+
+::: exercise
+**Exercise 4**. *Consider the monomials $x^n$ defined on $S$. Starting
+with $p₀=1$, show that $p₁ = x$ is orthogonal to it. Find $p₂$ so that
+it is a quadratic polynomial orthogonal to both $p₀$ and $p₁$. Find $p₃$
+so that it is a cubic polynomial orthogonal to $p_i$ with $i=0,1$, and
+2.*
+:::
+
+::: exercise
+**Exercise 5**. *Consider the operator on $L²(S)$. Show that it is
+self-adjoint with respect to the inner product
+[\[innerprod\]](#innerprod){reference-type="eqref"
+reference="innerprod"}.\
+Hint: Show that any operator of the form
+$\frac{d}{dx} \left( p(x) \frac{d}{dx}\right)$ where $p(x)$ is a
+polynomial is "manifestly" self-adjoint, provided $p$ vanishes on the
+boundary of $S$. Then find $p(x)$ for the operator above.*
+:::
+
+By convention, the Legendre polynomials $P_n$ are normalized by
+$$\left< P_m , P_n\right>:= \int_{-1}¹ P_m(x) P_n(x)  dx = {2 \over 2n +1} δ_{mn}$$
+The Rodriguez formula gives them as
+$$P_n(x) = \frac1{2^nn!} \frac{d^n}{dx^n} (x² - 1)^n$$ These polynomials
+are the eigenvectors of the operator $L$ of
+[\[LegendreLaplacian\]](#LegendreLaplacian){reference-type="eqref"
+reference="LegendreLaplacian"}.
+
+::: exercise
+**Exercise 6**. *Check this on the first few Legendre polynomials $p_i$
+for $i=0, ... , 3$. What are the eigenvalues?*
+:::
+
+#### Laplace equation
+
+The Legendre polynomials are famous because they are instrumental to the
+solution of the Laplace equation $Δ 𝜑  =0$ *in three dimensions*. In
+spherical coordinates, the three-dimensional Laplacian operator is
+$$Δ = \frac {1}{r²} \frac{∂}{∂r} \left( r² \frac{∂}{∂r}\ ⋅ \right) 
+    +\frac{1}{r² \sin θ } \frac{∂}{∂θ} \left( \sin θ  \frac{∂}{∂θ}\ ⋅ \right) 
+    +\frac{1}{r² \sin θ } \frac{∂²}{∂φ²}$$ To solve a problem with
+spherical symmetry, the *Ansatz* is made that the solution is separable:
+$𝜑(r, θ, φ) = R(r) Θ(θ) 𝛷(φ)$. This allows the separation of the Laplace
+equation into three parts. It can be shown that the $𝛷=$ constant and
+that the rest of the equation separates into the sum of two parts with
+one depending only on $r$ and the other only on $θ$. This means that the
+two must be equal to the same constant. The $θ$-dependent part is given
+by
+$$\frac{1}{\sin θ } \frac{d}{dθ} \left( \sin θ  \frac{d Θ}{dθ} \right)  + c Θ = 0.$$
+(The separation constant is denoted by $c$.)
+
+::: exercise
+**Exercise 7**. *Make the change of variables $x = \cos θ$ to show that
+this is an eigenvalue equation for the Legendre operator
+[\[LegendreLaplacian\]](#LegendreLaplacian){reference-type="eqref"
+reference="LegendreLaplacian"}.*
+:::
+
+#### An aside on Taylor series
+
+The completeness of eigenfunctions of a self-adjoint operator on an
+infinite-dimensional vector space is striking, but it should not be
+entirely shocking to a student of calculus. Recall that a real function
+$f$ of a real variable $x$ is analytic on a domain $D⊂ 𝐑$ if there is a
+convergent series on $D$ that agrees with the function $f$ on $D$:
+$$f(x) = \sum_{n=0}^∞ a_n x^n \quad \quad \textrm{on}\quad D.$$
+
+::: exercise
+**Exercise 8**. *Find an expression for the coefficients
+$\{a_n\}_{n=0}^∞$ in terms of $f$ and its derivatives.*
+:::
+
+## (Anti-)Periodic Functions
+
+Let $S=(-π, π)$, and consider the operator $$L = \frac{d²}{dx²}$$ on
+$L²(S)$. Then $$\int g \frac{d²}{dx²} f dx 
+= \left. g \frac{df}{dx} \right|_{x=-π}^π  - \int \frac{dg}{dx}\frac{df}{dx}  dx 
+= \left. g \frac{df}{dx} \right|_{x=-π}^π  
+    - \left. \frac{dg}{dx} f \right|_{x=-π}^π  
+    +\int \left(\frac{d²}{dx²} g\right)  f dx$$ The boundary terms will
+vanish if we restrict to the subset of $L²(S)$ of functions that vanish
+at $x =± π$ or have vanishing first derivatives at those points. Let's
+call the former $𝒟 (S)$ and the latter $𝒩 (S)$.
+
+::: exercise
+**Exercise 9**. *Find the eigenvectors and eigenvalues of the
+self-adjoint operator $L$ on $𝒟(S)$ and $𝒩(S)$. Show that they are
+orthogonal and normalize them.*
+:::
+
+If the eigenvectors $\{v_n(x)\}_{n∈ 𝐙}$, say of a self-adjoint operator
+span the vector space on which that operator acts, then in the context
+of $L²(S)$, that must mean that it is possible to decompose *any*
+function $f∈ L²(S)$ in a (possibly infinite) sum of these eigenvectors
+$f(x) = \sum_{n∈ 𝐙} c_n v_n(x)$. Alternatively, for some series of real
+coefficients $a_n, b_n ∈ 𝐑\ \forall n$. This form is called the Fourier
+series representation of the function $f(x)$. It gives an entire
+function in terms of a series $\{a_n\}_{n=1}^∞$ and $\{b_n\}_{n=0}^∞$ of
+real numbers called the Fourier coefficients.
+
+::: exercise
+**Exercise 10**. *Assuming this decomposition of the function and using
+the orthogonality of the eigen-functions you found above, calculate the
+$a$ and $b$ coefficients.*
+:::
+
+## Complex Hilbert Spaces Complex numbers are crucial for all life, so we
+would like to extend everything in sight to the complex domain. For one
+thing, that means that the vector spaces above will now be over $𝐂$. It
+turns out that the nicest inner product, however, should be real, or
+"Hermitian" to be more precise: It is linear in the second slot, and
+anti-linear in the first. Explicitly,
+$$\left< v, a u\right>  = a \left< v,  u\right>  \quad \textrm{and} \quad \left< av, u\right>  = ā \left< v,  u\right>$$
+
+::: exercise
+**Exercise 11**. *Let $V$ be an $n$-dimensional inner product space over
+$𝐂$ with Hermitian form $\left<\ ⋅\ ,\ ⋅\ \right>$. Let $L : V ⟶ V$ be a
+linear operator on $V$. Then $L$ has a matrix representation. If $L$ is
+self-adjoint with respect to the inner product, what is the equivalent
+condition on its matrix representation?*
+:::
+
+A self-adjoint operator on a Hermitian inner-product space is also
+called a Hermitian operator.
+
+::: exercise
+**Exercise 12**. *Show that the eigenvalues of a Hermitian operator are
+all real. Show that eigenvectors with distinct eigenvalues are
+orthogonal.*
+:::
+
+There is a great amount of very awesome stuff to discuss about complex
+variables. Unfortunately, we will have to skip all of it here. One thing
+we will need however is Euler's formula:
+$$e^{ix} = \cos (x) + i \sin (x)$$ This is important to us for the
+following reason:
+
+Consider extending the real Fourier analysis above to complex values (𝐂
+range but 𝐑 domain). Then $f : 𝐑 ⟶ 𝐂$ will have complex coefficients in
+the analogue of its Taylor expansion. Thus, the coefficients $a$ and $b$
+in [\[FourierReal\]](#FourierReal){reference-type="eqref"
+reference="FourierReal"} are now allowed to be complex. Mediate for a
+second on the conclusion that the complex analogue of that result is
+that for a complex-valued function $f$
+
+::: exercise
+**Exercise 13**. *For $m, n ∈ 𝐙$, show that[^1]
+$$\frac{1}{2π} \int_{-π}^π  e^{- i m x}\ e^{inx}\ dx =\ δ_{m,n}\ :=  \begin{cases} 
+        0 & \textrm{if}\quad m≠ n\\
+        1 & \textrm{if}\quad m = n
+    \end{cases}$$ Use this formula to derive an expression for the
+Fourier coefficients $\{c_n\}_{n=0}^∞$.*
+:::
+
+## Continuous Groups and Harmonic analysis The complex Fourier series
+[\[ComplexFourierSeries\]](#ComplexFourierSeries){reference-type="eqref"
+reference="ComplexFourierSeries"} can be expressed as an integral over a
+group. In this case, the group $G=𝐙$ is discrete and the integral
+reduces to a sum, but in general, the group could be continuous and even
+non-abelian. This is clear already from the formula for the Fourier
+modes $$c_n = \int_{𝐑} f(x) e^{-i n x} dx$$
+
+\...
+
+[^1]: *The symbol in the middle of the equation above is the Kronecker
+    $δ$; it is defined by the expression on the right.*
